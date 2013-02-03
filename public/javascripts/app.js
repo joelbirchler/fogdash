@@ -37,12 +37,13 @@ $(function() {
       var blurbTemplate = _.template("<span style='color:<%= color %>' title='<%= bugType %> #<%= bugId %>: <%= title %> (<%= remaining %> remaining)'>"+caseSymbol+"</span>");
 
       // bug status chart
+      $('#statusChart td').empty();
       _.each(data['status'], function(state, stateName) {
         var cell = chartMap[stateName] || chartLast;
-        cell.empty();
-
+        
         _.each(state, function(bugGroup, bugType) {
           var color = getColor(bugType);
+          
           _.each(bugGroup.bugs, function(bug) {
             var blurb = blurbTemplate({
               color: color,
